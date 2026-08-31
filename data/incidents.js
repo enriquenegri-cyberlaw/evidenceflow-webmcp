@@ -1,0 +1,46 @@
+const incidents = [
+  {
+    id: "SSH-2026-001",
+    title: "Suspicious SSH authentication activity",
+    status: "Under review",
+    events: [
+      {
+        id: "EVT-001",
+        timestamp: "2026-08-30T02:14:03Z",
+        source: "sshd",
+        ip: "203.0.113.50",
+        user: "root",
+        eventType: "failed-password",
+        message: "Failed password for root from 203.0.113.50 port 51842 ssh2",
+      },
+      {
+        id: "EVT-002",
+        timestamp: "2026-08-30T02:14:11Z",
+        source: "sshd",
+        ip: "203.0.113.50",
+        user: "root",
+        eventType: "failed-password",
+        message: "Failed password for root from 203.0.113.50 port 51856 ssh2",
+      },
+      {
+        id: "EVT-003",
+        timestamp: "2026-08-30T02:14:18Z",
+        source: "sshd",
+        ip: "203.0.113.50",
+        user: "root",
+        eventType: "connection-closed",
+        message: "Connection closed by authenticating user root 203.0.113.50 port 51856",
+      },
+      {
+        id: "EVT-004",
+        timestamp: "2026-08-30T03:02:47Z",
+        source: "sshd",
+        ip: "198.51.100.24",
+        user: "deploy",
+        eventType: "accepted-public-key",
+        message: "Accepted publickey for deploy from 198.51.100.24 port 44210 ssh2",
+      },
+    ],
+    findings: [],
+  },
+];
