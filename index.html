@@ -1,0 +1,37 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>EvidenceFlow</title>
+    <link rel="stylesheet" href="styles.css">
+  </head>
+  <body>
+    <header>
+      <h1>EvidenceFlow</h1>
+    </header>
+
+    <main>
+      <article aria-labelledby="incident-title">
+        <header>
+          <p>Incident <span id="incident-id"></span></p>
+          <h2 id="incident-title"></h2>
+          <p>Status: <strong id="incident-status"></strong></p>
+        </header>
+
+        <section aria-labelledby="events-heading">
+          <h2 id="events-heading">Events</h2>
+          <ol id="event-list"></ol>
+        </section>
+
+        <section aria-labelledby="findings-heading">
+          <h2 id="findings-heading">Findings</h2>
+          <div id="findings"></div>
+        </section>
+      </article>
+    </main>
+
+    <script src="data/incidents.js"></script>
+    <script src="app.js"></script>
+  </body>
+</html>

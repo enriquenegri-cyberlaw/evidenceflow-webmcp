@@ -1,0 +1,250 @@
+:root {
+  color-scheme: light;
+  --page-background: #f3f6f8;
+  --surface: #ffffff;
+  --surface-subtle: #f7f9fa;
+  --text: #17242d;
+  --text-muted: #5a6b76;
+  --border: #d6dfe4;
+  --border-strong: #bcc9d0;
+  --accent: #176b73;
+  --accent-dark: #0f4d55;
+  --accent-soft: #e7f3f3;
+  --header-background: #102630;
+  --header-text: #f5fafb;
+  --status-background: #e7f4ef;
+  --status-border: #b9ddcf;
+  --status-text: #17634e;
+  --shadow: 0 12px 32px rgb(20 43 54 / 8%);
+}
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  min-width: 20rem;
+  margin: 0;
+  background: var(--page-background);
+  color: var(--text);
+  font-family:
+    system-ui,
+    -apple-system,
+    BlinkMacSystemFont,
+    "Segoe UI",
+    sans-serif;
+  font-size: 1rem;
+  line-height: 1.5;
+}
+
+body > header {
+  border-bottom: 0.25rem solid var(--accent);
+  background: var(--header-background);
+  color: var(--header-text);
+}
+
+body > header h1 {
+  width: min(calc(100% - 2rem), 68rem);
+  margin: 0 auto;
+  padding: 1.25rem 0;
+  font-size: clamp(1.4rem, 3vw, 1.75rem);
+  font-weight: 700;
+  letter-spacing: 0.02em;
+}
+
+main {
+  width: min(calc(100% - 2rem), 68rem);
+  margin: 2.5rem auto 4rem;
+}
+
+main > article {
+  overflow: hidden;
+  border: 1px solid var(--border);
+  border-radius: 0.875rem;
+  background: var(--surface);
+  box-shadow: var(--shadow);
+}
+
+main > article > header {
+  padding: 2rem 2.25rem;
+  border-bottom: 1px solid var(--border);
+  background: var(--surface-subtle);
+}
+
+main > article > header p:first-child {
+  margin: 0 0 0.45rem;
+  color: var(--text-muted);
+  font-size: 0.78rem;
+  font-weight: 700;
+  letter-spacing: 0.09em;
+  text-transform: uppercase;
+}
+
+#incident-id {
+  color: var(--accent-dark);
+  font-family: ui-monospace, SFMono-Regular, Consolas, "Liberation Mono", monospace;
+  font-weight: 700;
+  letter-spacing: 0.04em;
+}
+
+#incident-title {
+  margin: 0;
+  color: var(--text);
+  font-size: clamp(1.65rem, 4vw, 2.35rem);
+  line-height: 1.2;
+}
+
+main > article > header p:last-child {
+  margin: 1rem 0 0;
+  color: var(--text-muted);
+}
+
+#incident-status {
+  display: inline-flex;
+  align-items: center;
+  margin-left: 0.4rem;
+  padding: 0.25rem 0.65rem;
+  border: 1px solid var(--status-border);
+  border-radius: 999px;
+  background: var(--status-background);
+  color: var(--status-text);
+  font-size: 0.8rem;
+  font-weight: 700;
+  letter-spacing: 0.02em;
+  line-height: 1.4;
+}
+
+main > article > section {
+  padding: 2rem 2.25rem;
+}
+
+main > article > section + section {
+  border-top: 1px solid var(--border);
+}
+
+main > article > section > h2 {
+  margin: 0 0 1.25rem;
+  color: var(--text);
+  font-size: 1.25rem;
+  line-height: 1.3;
+}
+
+#event-list {
+  display: grid;
+  gap: 1rem;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+#event-list > li > article {
+  overflow: hidden;
+  border: 1px solid var(--border-strong);
+  border-left: 0.25rem solid var(--accent);
+  border-radius: 0.625rem;
+  background: var(--surface);
+}
+
+#event-list h3 {
+  margin: 0;
+  padding: 0.8rem 1rem;
+  border-bottom: 1px solid var(--border);
+  background: var(--accent-soft);
+  color: var(--accent-dark);
+  font-family: ui-monospace, SFMono-Regular, Consolas, "Liberation Mono", monospace;
+  font-size: 0.9rem;
+  letter-spacing: 0.04em;
+}
+
+#event-list dl {
+  display: grid;
+  grid-template-columns: 9rem minmax(0, 1fr);
+  margin: 0;
+}
+
+#event-list dt,
+#event-list dd {
+  min-width: 0;
+  padding: 0.7rem 1rem;
+  border-top: 1px solid var(--border);
+}
+
+#event-list dt:first-of-type,
+#event-list dd:first-of-type {
+  border-top: 0;
+}
+
+#event-list dt {
+  border-right: 1px solid var(--border);
+  background: var(--surface-subtle);
+  color: var(--text-muted);
+  font-size: 0.78rem;
+  font-weight: 700;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+}
+
+#event-list dd {
+  margin: 0;
+  color: var(--text);
+  overflow-wrap: anywhere;
+}
+
+#event-list dd:nth-of-type(-n + 4) {
+  font-family: ui-monospace, SFMono-Regular, Consolas, "Liberation Mono", monospace;
+  font-size: 0.9rem;
+  font-variant-numeric: tabular-nums;
+}
+
+#event-list dd:nth-of-type(2) {
+  color: var(--accent-dark);
+  font-weight: 700;
+}
+
+#findings {
+  border: 1px dashed var(--border-strong);
+  border-radius: 0.625rem;
+  background: var(--surface-subtle);
+}
+
+#findings p {
+  margin: 0;
+  padding: 1.25rem;
+  color: var(--text-muted);
+  text-align: center;
+}
+
+@media (max-width: 40rem) {
+  body > header h1,
+  main {
+    width: min(calc(100% - 1rem), 68rem);
+  }
+
+  main {
+    margin-top: 1rem;
+    margin-bottom: 2rem;
+  }
+
+  main > article {
+    border-radius: 0.625rem;
+  }
+
+  main > article > header,
+  main > article > section {
+    padding: 1.35rem 1rem;
+  }
+
+  #event-list dl {
+    grid-template-columns: minmax(0, 1fr);
+  }
+
+  #event-list dt {
+    padding-bottom: 0.15rem;
+    border-right: 0;
+  }
+
+  #event-list dd {
+    padding-top: 0.15rem;
+    border-top: 0;
+  }
+}
