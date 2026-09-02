@@ -20,6 +20,7 @@ for (const event of chronologicalEvents) {
 
   const displayedFields = [
     ["Timestamp", event.timestamp],
+    ["Source", event.source],
     ["Event type", event.eventType],
     ["IP address", event.ip],
     ["User", event.user],
