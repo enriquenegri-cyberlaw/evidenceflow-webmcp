@@ -201,6 +201,8 @@ npm test
 
 The tests load the page scripts in the order used by `index.html`, with a minimal DOM stub and a stand-in for `document.modelContext`. They cover the WebMCP tool validation, finding creation, the per-incident finding limit, the human review controls, keyboard focus after review decisions, and the event field styling hooks. They do not replace testing in a browser with WebMCP enabled.
 
+The same tests run on GitHub Actions (`.github/workflows/tests.yml`) for every pull request and every push to `main`, on Node.js 20, 22 and 24. To require them before merging, add the `All tests passed` check to the branch protection rule for `main`.
+
 ## Design Perspective
 
 My background is in law and digital law rather than software engineering.
