@@ -104,7 +104,7 @@ The current WebMCP implementation includes:
 - bounded evidence ID arrays;
 - validation of cited evidence IDs;
 - duplicate evidence ID rejection;
-- a per-session finding limit;
+- a per-incident finding limit;
 - constant error responses for oversized invalid identifiers;
 - text-only DOM rendering for evidence fields;
 - defensive copies of returned finding data.
@@ -190,6 +190,16 @@ Validated behaviors include:
 - evidence-reference validation.
 
 Some agent clients may differ in how they serialize tool arguments. The EvidenceFlow tools themselves use standard WebMCP registrations and have been validated directly through Chrome and the WebMCP Inspector.
+
+### Automated Tests
+
+The repository also includes automated tests. They need Node.js 20 or later and no dependencies:
+
+```bash
+npm test
+```
+
+The tests load the page scripts in the order used by `index.html`, with a minimal DOM stub and a stand-in for `document.modelContext`. They cover the WebMCP tool validation, finding creation, the per-incident finding limit, the human review controls, keyboard focus after review decisions, and the event field styling hooks. They do not replace testing in a browser with WebMCP enabled.
 
 ## Design Perspective
 

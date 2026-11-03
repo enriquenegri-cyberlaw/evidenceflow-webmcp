@@ -18,21 +18,32 @@ for (const event of chronologicalEvents) {
 
   eventHeading.textContent = event.id;
 
+  // Field styles are attached by class rather than by position, so adding or
+  // reordering fields cannot move a style to the wrong field.
   const displayedFields = [
-    ["Timestamp", event.timestamp],
-    ["Source", event.source],
-    ["Event type", event.eventType],
-    ["IP address", event.ip],
-    ["User", event.user],
+    ["Timestamp", event.timestamp, "event-value--identifier"],
+    ["Source", event.source, "event-value--identifier"],
+    [
+      "Event type",
+      event.eventType,
+      "event-value--identifier event-value--event-type",
+    ],
+    ["IP address", event.ip, "event-value--identifier"],
+    ["User", event.user, "event-value--identifier"],
     ["Message", event.message],
   ];
 
-  for (const [label, value] of displayedFields) {
+  for (const [label, value, className] of displayedFields) {
     const term = document.createElement("dt");
     const description = document.createElement("dd");
 
     term.textContent = label;
     description.textContent = value;
+
+    if (className) {
+      description.className = className;
+    }
+
     details.append(term, description);
   }
 
@@ -75,6 +86,19 @@ function appendFindingDetail(details, label, value, className) {
 }
 
 function renderFindings() {
+  // Re-rendering replaces every finding control. Remember which one had
+  // focus so that it can be restored, instead of focus falling back to the
+  // page after a review decision or a new agent proposal.
+  const focusedElement = document.activeElement;
+  const previousFocus =
+    focusedElement && findingsContainer.contains(focusedElement)
+      ? {
+          findingId: focusedElement.getAttribute("data-finding-id"),
+          reviewStatus: focusedElement.getAttribute("data-review-status"),
+        }
+      : null;
+  const focusTargets = new Map();
+
   findingsContainer.replaceChildren();
   findingsContainer.classList.toggle(
     "findings-empty",
@@ -101,6 +125,9 @@ function renderFindings() {
     card.className = "finding-card";
     findingHeading.id = `finding-${finding.id}`;
     findingHeading.textContent = finding.id;
+    findingHeading.tabIndex = -1;
+    findingHeading.dataset.findingId = finding.id;
+    focusTargets.set(`heading:${finding.id}`, findingHeading);
     card.setAttribute("aria-labelledby", findingHeading.id);
 
     statusBadge.className = `finding-status finding-status--${finding.status}`;
@@ -161,10 +188,13 @@ function renderFindings() {
         button.type = "button";
         button.className = `review-button ${action.className}`;
         button.textContent = action.label;
+        button.dataset.findingId = finding.id;
+        button.dataset.reviewStatus = action.status;
         button.addEventListener("click", () => {
           finding.status = action.status;
           renderFindings();
         });
+        focusTargets.set(`button:${finding.id}:${action.status}`, button);
         reviewControls.append(button);
       }
 
@@ -172,6 +202,16 @@ function renderFindings() {
     }
 
     findingsContainer.append(card);
+  }
+
+  if (previousFocus?.findingId) {
+    // Same review button if the finding is still pending, otherwise the
+    // finding's heading (its buttons are gone once a decision is made).
+    const focusTarget =
+      focusTargets.get(
+        `button:${previousFocus.findingId}:${previousFocus.reviewStatus}`,
+      ) ?? focusTargets.get(`heading:${previousFocus.findingId}`);
+    focusTarget?.focus();
   }
 }
 

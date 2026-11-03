@@ -1,0 +1,12 @@
+{
+  "name": "evidenceflow-webmcp",
+  "private": true,
+  "description": "WebMCP-powered cybersecurity investigation prototype",
+  "license": "MIT",
+  "engines": {
+    "node": ">=20"
+  },
+  "scripts": {
+    "test": "node --test"
+  }
+}
