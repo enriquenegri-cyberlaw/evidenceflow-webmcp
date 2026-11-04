@@ -130,9 +130,13 @@ function renderFindings() {
     focusTargets.set(`heading:${finding.id}`, findingHeading);
     card.setAttribute("aria-labelledby", findingHeading.id);
 
+    // aria-label is not allowed on a generic <span> and browsers ignore it
+    // there, so the "Status:" prefix is visually hidden text instead.
+    const statusLabel = document.createElement("span");
+    statusLabel.className = "visually-hidden";
+    statusLabel.textContent = "Status: ";
     statusBadge.className = `finding-status finding-status--${finding.status}`;
-    statusBadge.textContent = finding.status;
-    statusBadge.setAttribute("aria-label", `Status: ${finding.status}`);
+    statusBadge.append(statusLabel, finding.status);
     cardHeader.append(findingHeading, statusBadge);
 
     findingText.className = "finding-text";
