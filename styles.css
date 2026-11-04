@@ -190,13 +190,13 @@ main > article > section > h2 {
   overflow-wrap: anywhere;
 }
 
-#event-list dd:nth-of-type(-n + 4) {
+#event-list dd.event-value--identifier {
   font-family: ui-monospace, SFMono-Regular, Consolas, "Liberation Mono", monospace;
   font-size: 0.9rem;
   font-variant-numeric: tabular-nums;
 }
 
-#event-list dd:nth-of-type(2) {
+#event-list dd.event-value--event-type {
   color: var(--accent-dark);
   font-weight: 700;
 }
@@ -243,6 +243,11 @@ main > article > section > h2 {
   font-family: ui-monospace, SFMono-Regular, Consolas, "Liberation Mono", monospace;
   font-size: 0.9rem;
   letter-spacing: 0.04em;
+}
+
+.finding-card h3:focus-visible {
+  outline: 0.2rem solid rgb(23 107 115 / 30%);
+  outline-offset: 0.15rem;
 }
 
 .finding-status,
