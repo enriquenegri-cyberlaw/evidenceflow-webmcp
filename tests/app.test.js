@@ -66,10 +66,22 @@ function describeFocus(document) {
   return `${element.tagName.toLowerCase()} "${element.textContent}"${location}`;
 }
 
-function statusOf(document, findingId) {
+function statusBadge(document, findingId) {
   return findFirst(findingCard(document, findingId), (element) =>
     element.classList.contains("finding-status"),
-  ).textContent;
+  );
+}
+
+// The status as displayed, without text that is only for assistive
+// technology.
+function statusOf(document, findingId) {
+  return statusBadge(document, findingId)
+    .childNodes.filter(
+      (node) =>
+        node.nodeType === 3 || !node.classList.contains("visually-hidden"),
+    )
+    .map((node) => node.textContent)
+    .join("");
 }
 
 test("renders the incident and its events in chronological order", () => {
@@ -167,6 +179,24 @@ test("renders an agent proposal with human review controls", async () => {
     ),
     ["Approve", "Reject", "Need more evidence"],
   );
+});
+
+test("the status badge is announced with a 'Status:' prefix", async () => {
+  const { call, document } = loadEvidenceFlow();
+
+  await call("propose_finding", proposal);
+
+  // Regression: the prefix used to be an aria-label on a generic <span>,
+  // which ARIA does not allow and browsers ignore.
+  const badge = statusBadge(document, "FND-001");
+  assert.equal(badge.getAttribute("aria-label"), null);
+  assert.equal(badge.textContent, "Status: pending-human-review");
+  const [label] = badge.children;
+  assert.equal(label.className, "visually-hidden");
+  assert.equal(label.textContent, "Status: ");
+
+  const css = fs.readFileSync(path.join(repoRoot, "styles.css"), "utf8");
+  assert.match(css, /^\.visually-hidden \{/m);
 });
 
 test("agent-supplied text is rendered as text only", async () => {
