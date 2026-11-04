@@ -107,7 +107,8 @@ The current WebMCP implementation includes:
 - a per-incident finding limit;
 - constant error responses for oversized invalid identifiers;
 - text-only DOM rendering for evidence fields;
-- defensive copies of returned finding data.
+- defensive copies of returned finding data;
+- the WebMCP `untrustedContentHint` annotation on `get_incident_events`, so that agent clients that support it can treat event fields as untrusted content.
 
 Agent-generated findings cannot enter an approved state through `propose_finding`; they always begin as `pending-human-review`.
 

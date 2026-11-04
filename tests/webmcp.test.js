@@ -52,6 +52,23 @@ test("registers the three documented WebMCP tools", () => {
   assert.notEqual(tools.get("propose_finding").annotations?.readOnlyHint, true);
 });
 
+test("only get_incident_events marks its output as untrusted content", () => {
+  const { tools } = loadEvidenceFlow();
+
+  assert.equal(
+    tools.get("get_incident_events").annotations?.untrustedContentHint,
+    true,
+  );
+  assert.notEqual(
+    tools.get("list_incidents").annotations?.untrustedContentHint,
+    true,
+  );
+  assert.notEqual(
+    tools.get("propose_finding").annotations?.untrustedContentHint,
+    true,
+  );
+});
+
 test("the page still works without WebMCP support", () => {
   const { document, tools } = loadEvidenceFlow({ withModelContext: false });
 

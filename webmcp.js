@@ -58,7 +58,9 @@ if (typeof modelContext?.registerTool === "function") {
         required: ["incident_id"],
         additionalProperties: false,
       },
-      annotations: { readOnlyHint: true },
+      // Event fields come from the monitored systems and can contain text
+      // chosen by an attacker, such as a login user name.
+      annotations: { readOnlyHint: true, untrustedContentHint: true },
       execute({ incident_id }) {
         if (!isStringWithinCharacterLimit(incident_id, MAX_INCIDENT_ID_LENGTH)) {
           return {
