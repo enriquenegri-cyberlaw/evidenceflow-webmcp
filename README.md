@@ -223,7 +223,9 @@ The project explores how WebMCP can support not only agent capability, but also 
 
 ## Repository Status
 
-The current hackathon MVP is feature-frozen.
+EvidenceFlow was submitted to The WebMCP Challenge 2026, and the hackathon evaluation is complete.
+
+After the evaluation, the prototype received maintenance fixes for keyboard focus during human review and for event field styling, plus automated tests that run on GitHub Actions. The WebMCP tools and their validation rules did not change.
 
 The application uses only synthetic evidence and is intended as a demonstration of the WebMCP investigation workflow, not as a production security platform.
 
